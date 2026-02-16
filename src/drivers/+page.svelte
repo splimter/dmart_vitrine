@@ -1,0 +1,211 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  let copiedCommand = $state<string | null>(null);
+
+  function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text).then(() => {
+      copiedCommand = text;
+      setTimeout(() => {
+        copiedCommand = null;
+      }, 2000);
+    });
+  }
+</script>
+
+<div class="content">
+  <h1>Drivers & SDKs</h1>
+  <p class="intro">Integrate DMART with official client libraries.</p>
+
+  <div class="feature-section">
+    <h2>Python</h2>
+    <div class="grid-list">
+      <div class="item">
+        <strong>pydmart</strong>
+        <span>Official Python client.</span>
+        <div class="code-container">
+          <div class="code-block">pip install pydmart</div>
+          <button class="copy-btn" onclick={() => copyToClipboard('pip install pydmart')} aria-label="Copy command">
+            {#if copiedCommand === 'pip install pydmart'}
+              ✓
+            {:else}
+              📋
+            {/if}
+          </button>
+        </div>
+        <a href="https://pypi.org/project/pydmart/" target="_blank" rel="noopener noreferrer">PyPI &rarr;</a>
+      </div>
+      <div class="item">
+        <strong>dmart</strong>
+        <span>Core package & CLI.</span>
+        <div class="code-container">
+          <div class="code-block">pip install dmart</div>
+          <button class="copy-btn" onclick={() => copyToClipboard('pip install dmart')} aria-label="Copy command">
+            {#if copiedCommand === 'pip install dmart'}
+              ✓
+            {:else}
+              📋
+            {/if}
+          </button>
+        </div>
+        <a href="https://pypi.org/project/dmart/" target="_blank" rel="noopener noreferrer">PyPI &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-section">
+    <h2>TypeScript / JavaScript</h2>
+    <div class="grid-list">
+      <div class="item">
+        <strong>@edraj/tsdmart</strong>
+        <span>Fully typed client for Node, Deno, Bun, and browsers.</span>
+        <div class="code-container">
+          <div class="code-block">npm install @edraj/tsdmart</div>
+          <button class="copy-btn" onclick={() => copyToClipboard('npm install @edraj/tsdmart')} aria-label="Copy command">
+            {#if copiedCommand === 'npm install @edraj/tsdmart'}
+              ✓
+            {:else}
+              📋
+            {/if}
+          </button>
+        </div>
+        <a href="https://www.npmjs.com/package/@edraj/tsdmart" target="_blank" rel="noopener noreferrer">NPM &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-section">
+    <h2>Dart / Flutter</h2>
+    <div class="grid-list">
+      <div class="item">
+        <strong>dmart</strong>
+        <span>Native Dart package for cross-platform apps.</span>
+        <div class="code-container">
+          <div class="code-block">flutter pub add dmart</div>
+          <button class="copy-btn" onclick={() => copyToClipboard('flutter pub add dmart')} aria-label="Copy command">
+            {#if copiedCommand === 'flutter pub add dmart'}
+              ✓
+            {:else}
+              📋
+            {/if}
+          </button>
+        </div>
+        <a href="https://pub.dev/packages/dmart" target="_blank" rel="noopener noreferrer">pub.dev &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .content {
+    color: var(--text-main);
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-family: var(--font-sans);
+  }
+
+  .feature-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+  }
+
+  .grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .item {
+    background: var(--bg-color);
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .item strong {
+    color: var(--text-main);
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .item span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .code-container {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .code-block {
+    padding: 0.5rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    flex-grow: 1;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    min-width: 40px;
+  }
+
+  .copy-btn:hover {
+    color: var(--text-main);
+    background-color: var(--bg-color);
+  }
+
+  a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-top: auto;
+    display: inline-block;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
